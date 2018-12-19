@@ -1,10 +1,6 @@
 #! /usr/bin/env python
-
-
 import os
 import smtplib
-
-
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
@@ -12,19 +8,15 @@ from email.MIMEImage import MIMEImage
 
 def _sendmail(smtp_server,port,account,password,str_from,list_to,msg):
     smtp = smtplib.SMTP(smtp_server,port)
-   # smtp.starttls()
-   # smtp.ehlo()
     smtp.login(account, password)
     smtp.sendmail(str_from, list_to,msg)
     smtp.close()
-
 
 def _get_pictures(image_dir):
     pictures = []
     for f in os.listdir(image_dir):
         pictures.append(f)
     return pictures
-
 
 def _create_msg(screen_name,screens,image_dir,str_from,list_to):
     msgRoot = MIMEMultipart('related')
@@ -80,9 +72,8 @@ def main(str_from,list_to,image_dir):
 
 
 if __name__ == '__main__':
-   str_from = 'zabbix_report@126.com'
+   str_from = ''
    list_to = [
-                "test1@126.com","test2@126.com"
              ]
-   image_dir = '/data/graph'
+   image_dir = '/data/screens/graph'
    main(str_from,list_to,image_dir)
